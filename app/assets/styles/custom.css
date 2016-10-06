@@ -1,0 +1,112 @@
+body, html {
+  height: 100%;
+  overflow: hidden;
+}
+#main{
+	height: 100%;
+	margin-top: 5%
+}
+#login{
+	width: 600px;
+    padding: 10px;
+    border-radius: 3px;
+    /*border: 1px solid black;*/
+    margin:auto;
+    height: 80%
+}
+
+#image{
+	margin: auto;
+    width: 17%;
+}
+
+.logo{
+	height: 30%;
+    width: 100%;
+}
+#headLine{
+	margin-top: 5%
+}
+.tacenter{
+	text-align: center;
+}
+
+.hfont{
+	font-family: "Comic Sans MS", cursive, sans-serif;
+    color: #555;
+    font-size: 35px;
+    font-weight: 400;
+}
+
+.bfont{
+	color: #666;
+}
+
+#box{
+
+}
+
+.loginInput{
+	border: 2px solid #D1D5DE;
+    border-radius: 3px;
+    box-shadow: none;
+    padding: 4px 10px;
+    height: 40px;
+    font-weight: 400;
+    font-size: 13px;
+    width: 100%;
+    margin-top: 2%
+}
+
+.loginbox{
+    width: 70%;
+    margin: auto;
+    margin-top: 10%;
+}
+.loginbtn{
+	margin-top: 2%;
+	background-color: #4e8ef7;
+    color: #fff;
+    display: block;
+    font-weight: 400;
+    font-size: 18px;
+    padding: 12px;
+    width: 100%;
+    border: 2px solid #5087e2;
+}
+.forgotpw{
+	margin-top: 2%;
+	color: #4e8ff7;
+}
+.fl{
+	float: left;
+}
+
+.fr{
+	float: right;
+}
+
+.twotop{
+    margin-top: 2%
+}
+
+.fs43{
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    color: #555;
+    font-size: 38px;
+}
+
+.resetp{
+    width: 84%;
+    margin: auto;
+}
+.mt15{
+    margin-top: 15%
+}
+.red{
+    color: red;
+}
+
+.green{
+    color: green
+}
