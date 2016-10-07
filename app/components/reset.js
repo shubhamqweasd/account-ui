@@ -39,7 +39,7 @@ class Reset extends React.Component {
                <h1 className="tacenter fs43">Reset your password</h1>
                <h5 className="tacenter bfont resetp">Enter your email below and we will send you a link to reset your password.</h5>
                <h5 className="tacenter red">{ this.state.errorMessage }</h5>
-               <h4 className="tacenter green">{ this.state.successMessage }</h4>
+               <h4 className="tacenter green">{ this.state.successMessage } <Link to="/login"><a href="#" className="forgotpw">Go to login</a></Link> </h4>
                <form onSubmit={this.reset.bind(this)}>
          			<input type="email" value={this.state.email} onChange={this.changeHandler.bind(this,'email')} className="loginInput from-control mt15" placeholder="Email." disabled={this.state.successReset} required/>
          			<button className="loginbtn" type="submit" disabled={this.state.successReset}> SUBMIT </button>

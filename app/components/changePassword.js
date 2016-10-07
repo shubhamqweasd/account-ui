@@ -28,7 +28,7 @@ class ChangePassword extends React.Component {
          this.state.password = ''
          this.state.confirmPassword = ''
          this.state.successChange = true
-         this.state.successMessage = "We have changed your password, you can now login with your new password."
+         this.state.successMessage = 'We have changed your password, you can now login with your new password. '
          this.state['errorMessage'] = ''
          this.setState(this.state)
       }.bind(this),function(err){
@@ -59,7 +59,7 @@ class ChangePassword extends React.Component {
                <h1 className="tacenter fs43">Change password</h1>
                <h5 className="tacenter bfont resetp">Enter your new password below.</h5>
                <h5 className="tacenter red">{ this.state.errorMessage }</h5>
-               <h4 className="tacenter green">{ this.state.successMessage }</h4>
+               <h4 className="tacenter green">{ this.state.successMessage } <Link to="/login"><a href="#" className="forgotpw">Go to login</a></Link> </h4>
                <form onSubmit={this.matchPasswords.bind(this)}>
          			<input type="password" value={this.state.password} onChange={this.changeHandler.bind(this,'password')} className="loginInput from-control mt15" placeholder="Password." disabled={this.state.successChange} required/>
                   <input type="password" value={this.state.confirmPassword} onChange={this.changeHandler.bind(this,'confirmPassword')} className="loginInput from-control" placeholder="Confirm password." disabled={this.state.successChange} required/>
