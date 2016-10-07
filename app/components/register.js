@@ -8,16 +8,24 @@ class Register extends React.Component {
       super()
       this.state = {
          errorMessage:'',
+         successMessage: "",
          name:'',
          email:'',
-         password:''
+         password:'',
+         successChange:false
       }
    }
    signUp(e){
       e.preventDefault()
       let postData = {email:this.state.email,password:this.state.password,name:this.state.name,isAdmin:false}
       axios.post(configObject.frontendServerURL+"/user/signup",postData).then(function(data){
-         window.location.href = configObject.dashboardUrl
+         this.state.password = ''
+         this.state.name = ''
+         this.state.email = ''
+         this.state.successChange = true
+         this.state.successMessage = 'We have sent you an account activation link on your email, please verify your email before loging in.'
+         this.state['errorMessage'] = ''
+         this.setState(this.state)
       }.bind(this),function(err){
          this.state['errorMessage'] = 'User with same credentials exists, Please try again.'
          this.setState(this.state)
@@ -41,11 +49,12 @@ class Register extends React.Component {
       		</div>
       		<div className="loginbox">
                <h5 className="tacenter red">{ this.state.errorMessage }</h5>
+               <h4 className="tacenter green">{ this.state.successMessage }</h4>
                <form onSubmit={this.signUp.bind(this)}>
-         			<input type="text" value={this.state.name} onChange={this.changeHandler.bind(this,'name')} className="loginInput from-control" placeholder="Full Name" required/>
-                  <input type="email" value={this.state.email} onChange={this.changeHandler.bind(this,'email')} className="loginInput from-control" placeholder="Email" required/>
-                  <input type="password" value={this.state.password} onChange={this.changeHandler.bind(this,'password')} className="loginInput from-control" placeholder="Password" required/>
-         			<button className="loginbtn" type="submit"> Sign up</button>
+         			<input disabled={this.state.successChange} type="text" value={this.state.name} onChange={this.changeHandler.bind(this,'name')} className="loginInput from-control" placeholder="Full Name" required/>
+                  <input disabled={this.state.successChange} type="email" value={this.state.email} onChange={this.changeHandler.bind(this,'email')} className="loginInput from-control" placeholder="Email" required/>
+                  <input disabled={this.state.successChange} type="password" value={this.state.password} onChange={this.changeHandler.bind(this,'password')} className="loginInput from-control" placeholder="Password" required/>
+         			<button disabled={this.state.successChange} className="loginbtn" type="submit"> Sign up</button>
                </form>
       		</div>
             <div className="loginbox twotop">

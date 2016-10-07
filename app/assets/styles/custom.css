@@ -1,10 +1,8 @@
 body, html {
   height: 100%;
-  overflow: hidden;
 }
 #main{
 	height: 100%;
-	margin-top: 5%
 }
 #login{
 	width: 600px;
@@ -12,7 +10,9 @@ body, html {
     border-radius: 3px;
     /*border: 1px solid black;*/
     margin:auto;
-    height: 80%
+    height: 80%;
+    padding-top: 5%;
+
 }
 
 #image{
@@ -109,4 +109,14 @@ body, html {
 
 .green{
     color: green
+}
+.hide{
+    display: none;
+}
+
+.resendbtn {
+    padding: 0;
+    width: 50%;
+    font-size: 15px;
+    margin: auto;
 }
