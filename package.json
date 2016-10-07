@@ -4,7 +4,7 @@
   "description": "",
   "main": "webpack.config.js",
   "scripts": {
-    "start": "webpack --watch --progress"
+    "start": "webpack-dev-server"
   },
   "author": "",
   "license": "BSD-2-Clause",
