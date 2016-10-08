@@ -4,6 +4,7 @@ import configObject from '../config/app'
 import axios from 'axios'
 import cookie from 'react-cookie'
 import CircularProgress from 'material-ui/CircularProgress'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 class NewServer extends React.Component {
    constructor(){
@@ -28,10 +29,10 @@ class NewServer extends React.Component {
       this.setProgress(true)
       let postData = {email:this.state.email,password:this.state.password,name:this.state.name,isAdmin:true}
       axios.post(configObject.frontendServerURL+"/user/signup",postData).then(function(data){
-         cookie.save('userId', data._id, { path: '/' });
-         cookie.save('userFullname', data.name, { path: '/' });
-         cookie.save('email', data.email, { path: '/' });
-         cookie.save('createdAt', data.createdAt, { path: '/' });
+         cookie.save('userId', data.data._id, { path: '/' });
+         cookie.save('userFullname', data.data.name, { path: '/' });
+         cookie.save('email', data.data.email, { path: '/' });
+         cookie.save('createdAt', data.data.createdAt, { path: '/' });
          window.location.href = configObject.dashboardUrl+"/#/admin"
       }.bind(this),function(err){
          this.setProgress(false) 

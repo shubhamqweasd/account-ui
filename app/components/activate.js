@@ -25,10 +25,10 @@ class Activate extends React.Component {
    activate(){
       let postData = {code:this.state.code}
       axios.post(configObject.frontendServerURL+"/user/activate",postData).then(function(data){
-         cookie.save('userId', data._id, { path: '/' });
-         cookie.save('userFullname', data.name, { path: '/' });
-         cookie.save('email', data.email, { path: '/' });
-         cookie.save('createdAt', data.createdAt, { path: '/' });
+         cookie.save('userId', data.data._id, { path: '/' });
+         cookie.save('userFullname', data.data.name, { path: '/' });
+         cookie.save('email', data.data.email, { path: '/' });
+         cookie.save('createdAt', data.data.createdAt, { path: '/' });
          window.location.href = configObject.dashboardUrl
       }.bind(this),function(error){
          this.state['errorMessage'] = 'Invalid Activation code.'

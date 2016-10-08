@@ -17,9 +17,11 @@ import NewServer from './components/newServer.js';
 
 class Layout extends React.Component {
 	componentWillMount() {
+		axios.defaults.withCredentials = true
 		axios.get(configObject.frontendServerURL+'/server/isNewServer').then((res)=>{
 			if(res.data){
-				window.location.href = '/#/newserver'
+				// changes this to server root/#/newserver
+				window.location.href = '/accounts/#/newserver'
 			}
 		})
 	}
