@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router'
 import configObject from '../config/app'
 import axios from 'axios'
+import cookie from 'react-cookie'
+import CircularProgress from 'material-ui/CircularProgress';
 
 class Login extends React.Component {
 	constructor(){
@@ -10,14 +12,21 @@ class Login extends React.Component {
 	}
 	login(e){
 		e.preventDefault()
+		this.setProgress(true)
 		let postData = {email:this.state.email,password:this.state.password}
 		axios.post(configObject.frontendServerURL+"/user/signin",postData).then(function(data){
+			cookie.save('userId', data._id, { path: '/' });
+            cookie.save('userFullname', data.name, { path: '/' });
+            cookie.save('email', data.email, { path: '/' });
+            cookie.save('createdAt', data.createdAt, { path: '/' });
 			window.location.href = configObject.dashboardUrl
 		}.bind(this),function(error){
+			this.setProgress(false)			
 			if(error.response.data.message == "Account verification needed"){
 				this.state['errorMessage'] = 'You email is not verified yet!.'
 				this.state.notVerified = true
 			} else{
+				this.state.notVerified = false
 				this.state['errorMessage'] = 'Invalid Credentials, Please try again or continue with Signup.'
 			}
 			this.setState(this.state)
@@ -40,8 +49,13 @@ class Login extends React.Component {
 				errorMessage:'',
 				email:'',
 				password:'',
-				notVerified:false
+				notVerified:false,
+				progress:false
 			}
+		this.setState(this.state)
+	}
+	setProgress(which){
+		this.state.progress = which
 		this.setState(this.state)
 	}
 	render() {
@@ -62,7 +76,8 @@ class Login extends React.Component {
 					<form onSubmit={this.login.bind(this)}>
 						<input type="email" value={this.state.email} onChange={this.changeHandler.bind(this,'email')} className="loginInput from-control" placeholder="Your Email." required />
 						<input type="password" value={this.state.password} onChange={this.changeHandler.bind(this,'password')} className="loginInput from-control" placeholder="Your Password." required />
-						<button className="loginbtn" type="submit"> Sign in to Cloudboost</button>
+						<button className={!this.state.progress ? 'loginbtn':'hide'} type="submit"> Sign in to Cloudboost</button>
+						<button className={this.state.progress ? 'loginbtn':'hide'} type="submit"> <CircularProgress color="white" size={28} thickness={4} /></button>
 					</form>
 					<Link to="/reset"><a href="#" className="forgotpw fl">Forgot password?</a></Link>
 					<Link to="/signup"><a href="#" className="forgotpw fr">Create Account</a></Link>

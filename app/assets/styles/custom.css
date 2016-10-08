@@ -1,5 +1,6 @@
 body, html {
   height: 100%;
+  font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, "Lucida Grande", sans-serif !important;
 }
 #main{
 	height: 100%;
@@ -73,6 +74,8 @@ body, html {
     padding: 12px;
     width: 100%;
     border: 2px solid #5087e2;
+    overflow: hidden;
+    height: 50px;
 }
 .forgotpw{
 	margin-top: 2%;
@@ -104,7 +107,7 @@ body, html {
     margin-top: 15%
 }
 .red{
-    color: red;
+    color: #a94442;
 }
 
 .green{
@@ -119,4 +122,10 @@ body, html {
     width: 50%;
     font-size: 15px;
     margin: auto;
+    height: 30px;
+
+}
+
+.fs13{
+    font-size: 13px !important;
 }

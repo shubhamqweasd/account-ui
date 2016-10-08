@@ -3,6 +3,9 @@ import ReactDOM from 'react-dom';
 import { Router, Route, hashHistory, IndexRoute } from 'react-router'
 import axios from 'axios'
 import configObject from './config/app'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import injectTapEventPlugin from 'react-tap-event-plugin';
+//injectTapEventPlugin();
 
 //components
 import Login from './components/login.js';
@@ -23,7 +26,9 @@ class Layout extends React.Component {
 	render() {
 	  return (
 	  	<div>
-	  		{ this.props.children }
+	  		<MuiThemeProvider>
+	  			{ this.props.children }
+	  		</MuiThemeProvider>
 	  	</div>
 	  );
 	}
