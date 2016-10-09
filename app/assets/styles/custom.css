@@ -5,15 +5,43 @@ body, html {
 #main{
 	height: 100%;
 }
+
+.loader{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -14px; /* margin is -0.5 * dimension */
+    margin-top: -14px;
+}
+
 #login{
 	width: 600px;
     padding: 10px;
     border-radius: 3px;
     /*border: 1px solid black;*/
-    margin:auto;
-    height: 80%;
-    padding-top: 5%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -300px; /* margin is -0.5 * dimension */
+    margin-top: -200px; 
 
+}
+
+#signup{
+     width: 600px;
+    padding: 10px;
+    border-radius: 3px;
+    /*border: 1px solid black;*/
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -300px; /* margin is -0.5 * dimension */
+    margin-top: -250px; 
+}
+
+.blackColor{
+    color: black !important;
+    text-decoration: none;
 }
 
 #image{
@@ -33,14 +61,16 @@ body, html {
 }
 
 .hfont{
-	font-family: "Comic Sans MS", cursive, sans-serif;
-    color: #555;
-    font-size: 35px;
+	font-family: "Roboto";
+    color: black;
+    font-size: 24px;
     font-weight: 400;
 }
 
 .bfont{
-	color: #666;
+	color: #989DAB;
+    font-weight: 400;
+    text-decoration: none;
 }
 
 #box{
@@ -56,16 +86,16 @@ body, html {
     font-weight: 400;
     font-size: 13px;
     width: 100%;
-    margin-top: 2%
+    margin-top: 3%
 }
 
 .loginbox{
     width: 70%;
     margin: auto;
-    margin-top: 10%;
+    margin-top: 5%;
 }
 .loginbtn{
-	margin-top: 2%;
+	margin-top:5%;
 	background-color: #4e8ef7;
     color: #fff;
     display: block;
@@ -76,6 +106,7 @@ body, html {
     border: 2px solid #5087e2;
     overflow: hidden;
     height: 50px;
+
 }
 .forgotpw{
 	margin-top: 2%;

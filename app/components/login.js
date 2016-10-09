@@ -27,7 +27,7 @@ class Login extends React.Component {
 				this.state.notVerified = true
 			} else{
 				this.state.notVerified = false
-				this.state['errorMessage'] = 'Invalid Credentials, Please try again or continue with Signup.'
+				this.state['errorMessage'] = 'Invalid Credentials, Please try again or create a new account.'
 			}
 			this.setState(this.state)
 		}.bind(this))
@@ -65,7 +65,7 @@ class Login extends React.Component {
 					<img className="logo" src="./app/assets/images/CbLogoIcon.png"/>
 				</div>
 				<div id="headLine">
-					<h3 className="tacenter hfont">One account for all CloudBoost.</h3>
+					<h3 className="tacenter hfont">Welcome back!</h3>
 				</div>
 				<div id="box">
 					<h5 className="tacenter bfont">Sign in with your CloudBoost ID to continue.</h5>
@@ -76,11 +76,11 @@ class Login extends React.Component {
 					<form onSubmit={this.login.bind(this)}>
 						<input type="email" value={this.state.email} onChange={this.changeHandler.bind(this,'email')} className="loginInput from-control" placeholder="Your Email." required />
 						<input type="password" value={this.state.password} onChange={this.changeHandler.bind(this,'password')} className="loginInput from-control" placeholder="Your Password." required />
-						<button className={!this.state.progress ? 'loginbtn':'hide'} type="submit"> Sign in to Cloudboost</button>
+						<button className={!this.state.progress ? 'loginbtn':'hide'} type="submit"> Sign in to CloudBoost <i class="icon ion-chevron-right"></i> </button>
 						<button className={this.state.progress ? 'loginbtn':'hide'} type="submit"> <CircularProgress color="white" size={28} thickness={4} /></button>
 					</form>
-					<Link to="/reset"><a href="#" className="forgotpw fl">Forgot password?</a></Link>
-					<Link to="/signup"><a href="#" className="forgotpw fr">Create Account</a></Link>
+					<Link to="/reset"><a href="#" className="forgotpw fl">Forgot password.</a></Link>
+					<Link to="/signup"><a href="#" className="forgotpw fr"><span class="blackColor">Dont have an account?</span> Get Started.</a></Link>
 				</div>
 			</div>
 		);

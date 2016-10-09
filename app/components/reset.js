@@ -44,17 +44,25 @@ class Reset extends React.Component {
    render() {
       return (
        	<div id="login">
+            <div id="image">
+               <img className="logo" src="./app/assets/images/CbLogoIcon.png"/>
+            </div>
+            <div id="headLine">
+               <h3 className="tacenter hfont">Reset your password.</h3>
+            </div>
+            <div id="box">
+               <h5 className="tacenter bfont">Enter your email and we'll reset the password for you.</h5>
+            </div>
       		<div className="loginbox">
-               <h1 className="tacenter fs43">Reset your password</h1>
-               <h5 className="tacenter bfont resetp">Enter your email below and we will send you a link to reset your password.</h5>
                <h5 className="tacenter red">{ this.state.errorMessage }</h5>
                <h4 className="tacenter green">{ this.state.successMessage }</h4>
-               <h4 className="tacenter"><Link to="/login"><a href="#" className="forgotpw">Go to login</a></Link></h4>
                <form onSubmit={this.reset.bind(this)}>
-         			<input type="email" value={this.state.email} onChange={this.changeHandler.bind(this,'email')} className="loginInput from-control mt15" placeholder="Email." disabled={this.state.successReset} required/>
-         			<button className={!this.state.progress ? 'loginbtn':'hide'} type="submit" disabled={this.state.successReset}> SUBMIT </button>
+         			<input type="email" value={this.state.email} onChange={this.changeHandler.bind(this,'email')} className="loginInput from-control" placeholder="Email." disabled={this.state.successReset} required/>
+         			<button className={!this.state.progress ? 'loginbtn':'hide'} type="submit" disabled={this.state.successReset}> Reset Password </button>
                   <button className={this.state.progress ? 'loginbtn':'hide'} type="submit"> <CircularProgress color="white" size={28} thickness={4} /></button>
                </form>
+               <Link to="/login"><a href="#" className="forgotpw fl">Login.</a></Link>
+               <Link to="/signup"><a href="#" className="forgotpw fr"><span class="blackColor">Dont have an account?</span> Create one.</a></Link>
       		</div>
       	</div>
       );
