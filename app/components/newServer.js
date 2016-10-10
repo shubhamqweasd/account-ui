@@ -74,7 +74,7 @@ class NewServer extends React.Component {
                			<input type="text" value={this.state.name} onChange={this.changeHandler.bind(this,'name')} className="loginInput from-control" placeholder="Full Name" required/>
                         <input type="email" value={this.state.email} onChange={this.changeHandler.bind(this,'email')} className="loginInput from-control" placeholder="Email" required/>
                         <input type="password" value={this.state.password} onChange={this.changeHandler.bind(this,'password')} className="loginInput from-control" placeholder="Password" required/>
-               			<button className="loginbtn" type="submit"> Sign up</button>
+               			<button className="loginbtn" type="submit"> Setup server</button>
                      </form>
             		</div>
                   <div className="loginbox twotop" >
