@@ -3,13 +3,15 @@ import { Link } from 'react-router'
 import configObject from '../config/app'
 import axios from 'axios'
 import cookie from 'react-cookie'
+import CircularProgress from 'material-ui/CircularProgress'
 
 class Activate extends React.Component {
    constructor(){
       super()
       this.state = {
          errorMessage:'',
-         code:null
+         code:null,
+         progress:false
       }
    }
    componentWillMount() {
@@ -23,6 +25,7 @@ class Activate extends React.Component {
       this.activate()
    }
    activate(){
+      this.setProgress(true)
       let postData = {code:this.state.code}
       axios.post(configObject.frontendServerURL+"/user/activate",postData).then(function(data){
          cookie.save('userId', data.data._id, { path: '/' });
@@ -31,20 +34,40 @@ class Activate extends React.Component {
          cookie.save('createdAt', data.data.createdAt, { path: '/' });
          window.location.href = configObject.dashboardUrl
       }.bind(this),function(error){
+         this.setProgress(false)
          this.state['errorMessage'] = 'Invalid Activation code.'
+         if(error.response == undefined){
+            this.state['errorMessage'] = "Sorry, we currently cannot process your request, please try again later."
+         }
          this.setState(this.state)
       }.bind(this))
    }
+   setProgress(which){
+      this.state.progress = which
+      this.setState(this.state)
+   }
    render() {
       return (
-       	<div id="login">
-      		<div className="loginbox">
-               <h1 className="tacenter fs43">Account Activation</h1>
-               <h5 className="tacenter bfont resetp">Please wait while we are activating your account...</h5>
-               <h5 className="tacenter red">{ this.state.errorMessage }</h5>
-               <h4 className="tacenter"><Link to="/login"><a href="#" className="forgotpw">Go to login</a></Link> </h4>
-      		</div>
-      	</div>
+         <div>
+            <div className={this.state.progress ? 'loader':'hide'}>
+               <CircularProgress color="#4E8EF7" size={50} thickness={6} />
+            </div>
+          	<div id="login" className={!this.state.progress ? '':'hide'}>
+               <div id="image">
+                  <img className="logo" src="./app/assets/images/CbLogoIcon.png"/>
+               </div>
+               <div id="headLine" >
+                  <h3 className="tacenter hfont">Account Activation.</h3>
+               </div>
+               <div id="box" >
+                  <h5 className="tacenter bfont">Please wait while we are activating your account...</h5>
+               </div>
+         		<div className="loginbox">
+                  <h5 className="tacenter red">{ this.state.errorMessage }</h5>
+                  <h4 className="tacenter"><Link to="/login"><a href="#" className="forgotpw">Go to login</a></Link> </h4>
+         		</div>
+         	</div>
+         </div>
       );
    }
 }

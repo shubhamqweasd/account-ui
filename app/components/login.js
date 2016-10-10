@@ -29,6 +29,9 @@ class Login extends React.Component {
 				this.state.notVerified = false
 				this.state['errorMessage'] = 'Invalid Credentials, Please try again or create a new account.'
 			}
+			if(error.response == undefined){
+            	this.state['errorMessage'] = "Sorry, we currently cannot process your request, please try again later."
+         	}
 			this.setState(this.state)
 		}.bind(this))
 	}
@@ -60,27 +63,32 @@ class Login extends React.Component {
 	}
 	render() {
 		return (
-			<div id="login">
-				<div id="image">
-					<img className="logo" src="./app/assets/images/CbLogoIcon.png"/>
-				</div>
-				<div id="headLine">
-					<h3 className="tacenter hfont">Welcome back!</h3>
-				</div>
-				<div id="box">
-					<h5 className="tacenter bfont">Sign in with your CloudBoost ID to continue.</h5>
-				</div>
-				<div className="loginbox">
-					<button onClick={this.resend.bind(this)} className={this.state.notVerified ? 'loginbtn resendbtn':'hide'}>Resend Verification Email</button>
-					<h5 className="tacenter red">{ this.state.errorMessage }</h5>
-					<form onSubmit={this.login.bind(this)}>
-						<input type="email" value={this.state.email} onChange={this.changeHandler.bind(this,'email')} className="loginInput from-control" placeholder="Your Email." required />
-						<input type="password" value={this.state.password} onChange={this.changeHandler.bind(this,'password')} className="loginInput from-control" placeholder="Your Password." required />
-						<button className={!this.state.progress ? 'loginbtn':'hide'} type="submit"> Sign in to CloudBoost <i class="icon ion-chevron-right"></i> </button>
-						<button className={this.state.progress ? 'loginbtn':'hide'} type="submit"> <CircularProgress color="white" size={28} thickness={4} /></button>
-					</form>
-					<Link to="/reset"><a href="#" className="forgotpw fl">Forgot password.</a></Link>
-					<Link to="/signup"><a href="#" className="forgotpw fr"><span class="blackColor">Dont have an account?</span> Get Started.</a></Link>
+			<div>
+	            <div className={this.state.progress ? 'loader':'hide'}>
+	               <CircularProgress color="#4E8EF7" size={50} thickness={6} />
+	            </div>
+				<div id="login" className={!this.state.progress ? '':'hide'}>
+					<div id="image">
+						<img className="logo" src="./app/assets/images/CbLogoIcon.png"/>
+					</div>
+					<div id="headLine">
+						<h3 className="tacenter hfont">Welcome back!</h3>
+					</div>
+					<div id="box">
+						<h5 className="tacenter bfont">Sign in with your CloudBoost ID to continue.</h5>
+					</div>
+					<div className="loginbox">
+						<h5 className="tacenter red">{ this.state.errorMessage }</h5>
+						<button onClick={this.resend.bind(this)} className={this.state.notVerified ? 'loginbtn':'hide'}>Resend Verification Email</button>
+						<form onSubmit={this.login.bind(this)} className={!this.state.notVerified ? '':'hide'}>
+							<input type="email" value={this.state.email} onChange={this.changeHandler.bind(this,'email')} className="loginInput from-control" placeholder="Your Email." required />
+							<input type="password" value={this.state.password} onChange={this.changeHandler.bind(this,'password')} className="loginInput from-control" placeholder="Your Password." required />
+							<button className="loginbtn" type="submit"> Sign in to CloudBoost <i class="icon ion-chevron-right"></i> </button>
+						</form>
+						<Link to="/reset" className={!this.state.notVerified ? '':'hide'}><a href="#" className="forgotpw fl">Forgot password.</a></Link>
+						<Link to="/login" className={this.state.notVerified ? '':'hide'} onClick={this.setInitialState.bind(this)}><a href="#" className="forgotpw fl">Login.</a></Link>
+						<Link to="/signup"><a href="#" className="forgotpw fr"><span class="blackColor">Dont have an account?</span> Get Started.</a></Link>
+					</div>
 				</div>
 			</div>
 		);
