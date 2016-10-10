@@ -5,7 +5,6 @@ body, html {
 #main{
 	height: 100%;
 }
-
 .loader{
     position: absolute;
     top: 50%;

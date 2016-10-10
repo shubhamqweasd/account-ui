@@ -21,7 +21,7 @@ class Layout extends React.Component {
 		axios.get(configObject.frontendServerURL+'/server/isNewServer').then((res)=>{
 			if(res.data){
 				// changes this to server root/#/newserver
-				window.location.href = '/accounts/#/newserver'
+				window.location.href = '/#/newserver'
 			}
 		})
 	}

@@ -33,10 +33,13 @@ class NewServer extends React.Component {
          cookie.save('userFullname', data.data.name, { path: '/' });
          cookie.save('email', data.data.email, { path: '/' });
          cookie.save('createdAt', data.data.createdAt, { path: '/' });
-         window.location.href = configObject.dashboardUrl+"/#/admin"
+         window.location.href = configObject.dashboardUrl
       }.bind(this),function(err){
          this.setProgress(false) 
          this.state['errorMessage'] = 'User with same credentials exists, Please try again.'
+         if(err.response == undefined){
+            this.state['errorMessage'] = "Sorry, we currently cannot process your request, please try again later."
+         }
          this.setState(this.state)
       }.bind(this))
    }
@@ -51,30 +54,34 @@ class NewServer extends React.Component {
    render() {
       return (
          <MuiThemeProvider>
-          	<div id="login">
-         		<div id="image">
-         			<img className="logo" src="./app/assets/images/CbLogoIcon.png"/>
-         		</div>
-         		<div id="headLine">
-         			<h3 className="tacenter hfont">Setup your CloudBoost Server.</h3>
-         		</div>
-         		<div id="box">
-         			<h5 className="tacenter bfont">Create an Admin account to get started.</h5>
-         		</div>
-         		<div className="loginbox">
-                  <h5 className="tacenter red">{ this.state.errorMessage }</h5>
-                  <form onSubmit={this.signUp.bind(this)}>
-            			<input type="text" value={this.state.name} onChange={this.changeHandler.bind(this,'name')} className="loginInput from-control" placeholder="Full Name" required/>
-                     <input type="email" value={this.state.email} onChange={this.changeHandler.bind(this,'email')} className="loginInput from-control" placeholder="Email" required/>
-                     <input type="password" value={this.state.password} onChange={this.changeHandler.bind(this,'password')} className="loginInput from-control" placeholder="Password" required/>
-            			<button className={!this.state.progress ? 'loginbtn':'hide'} type="submit"> Sign up</button>
-                     <button className={this.state.progress ? 'loginbtn':'hide'} type="submit"> <CircularProgress color="white" size={28} thickness={4} /></button>
-                  </form>
-         		</div>
-               <div className="loginbox twotop">
-                  <h5 className="tacenter bfont fs13">By creating an account, you agree with the <a href="" className="forgotpw">Terms and Conditions </a>.</h5>
+            <div>
+               <div className={this.state.progress ? 'loader':'hide'}>
+                  <CircularProgress color="#4E8EF7" size={50} thickness={6} />
                </div>
-         	</div>
+             	<div id="login" className={!this.state.progress ? '':'hide'}>
+            		<div id="image">
+            			<img className="logo" src="./app/assets/images/CbLogoIcon.png"/>
+            		</div>
+            		<div id="headLine">
+            			<h3 className="tacenter hfont">Setup your CloudBoost Server.</h3>
+            		</div>
+            		<div id="box">
+            			<h5 className="tacenter bfont">Create an Admin account to get started.</h5>
+            		</div>
+            		<div className="loginbox">
+                     <h5 className="tacenter red">{ this.state.errorMessage }</h5>
+                     <form onSubmit={this.signUp.bind(this)}>
+               			<input type="text" value={this.state.name} onChange={this.changeHandler.bind(this,'name')} className="loginInput from-control" placeholder="Full Name" required/>
+                        <input type="email" value={this.state.email} onChange={this.changeHandler.bind(this,'email')} className="loginInput from-control" placeholder="Email" required/>
+                        <input type="password" value={this.state.password} onChange={this.changeHandler.bind(this,'password')} className="loginInput from-control" placeholder="Password" required/>
+               			<button className="loginbtn" type="submit"> Sign up</button>
+                     </form>
+            		</div>
+                  <div className="loginbox twotop" >
+                     <h5 className="tacenter bfont fs13">By creating an account, you agree with the <a href="https://cloudboost.io/terms" target="_blank" className="forgotpw">Terms and Conditions </a>.</h5>
+                  </div>
+            	</div>
+            </div>
          </MuiThemeProvider>
       );
    }

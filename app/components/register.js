@@ -13,7 +13,6 @@ class Register extends React.Component {
          name:'',
          email:'',
          password:'',
-         successChange:false,
          progress:false
       }
    }
@@ -26,13 +25,15 @@ class Register extends React.Component {
          this.state.password = ''
          this.state.name = ''
          this.state.email = ''
-         this.state.successChange = true
          this.state.successMessage = 'We have sent you an account activation link on your email, please verify your email before loging in.'
          this.state['errorMessage'] = ''
          this.setState(this.state)
       }.bind(this),function(err){
          this.setProgress(false) 
          this.state['errorMessage'] = "User with same email already exists. You can reset your password, if you don't remember it."
+         if(err.response == undefined){
+            this.state['errorMessage'] = "Sorry, we currently cannot process your request, please try again later."
+         }
          this.setState(this.state)
       }.bind(this))
    }
@@ -47,8 +48,8 @@ class Register extends React.Component {
    render() {
       return (
        	<div>
-            <div className="loader" className={this.state.progress ? '':'hide'}>
-                   <center><CircularProgress color="#4E8EF7" size={28} thickness={4} /></center>
+            <div className={this.state.progress ? 'loader':'hide'}>
+               <CircularProgress color="#4E8EF7" size={50} thickness={6} />
             </div>
             <div id="signup" className={!this.state.progress ? '':'hide'}>
          		<div id="image" >
@@ -62,19 +63,22 @@ class Register extends React.Component {
          		</div>
                
          		<div className="loginbox" >
-                  <form onSubmit={this.signUp.bind(this)}>
-            			<input disabled={this.state.successChange} type="text" value={this.state.name} onChange={this.changeHandler.bind(this,'name')} className="loginInput from-control" placeholder="Full Name" required/>
-                     <input disabled={this.state.successChange} type="email" value={this.state.email} onChange={this.changeHandler.bind(this,'email')} className="loginInput from-control" placeholder="Email" required/>
-                     <input disabled={this.state.successChange} type="password" value={this.state.password} onChange={this.changeHandler.bind(this,'password')} className="loginInput from-control" placeholder="Password" required/>
-            			<button disabled={this.state.successChange} className="loginbtn"  type="submit"> Sign up for CloudBoost </button>
+                  <h5 className="tacenter red">{ this.state.errorMessage }</h5>
+                  <h5 className="tacenter green">{ this.state.successMessage }</h5>
+                  <h4 className={!this.state.successMessage == '' ? 'tacenter':'hide'}><Link to="/login"><a href="#" className="forgotpw">Go to login</a></Link> </h4>
+                  <form onSubmit={this.signUp.bind(this)} className={this.state.successMessage == '' ? '':'hide'}>
+            			<input type="text" value={this.state.name} onChange={this.changeHandler.bind(this,'name')} className="loginInput from-control" placeholder="Full Name" required/>
+                     <input type="email" value={this.state.email} onChange={this.changeHandler.bind(this,'email')} className="loginInput from-control" placeholder="Email" required/>
+                     <input type="password" value={this.state.password} onChange={this.changeHandler.bind(this,'password')} className="loginInput from-control" placeholder="Password" required/>
+            			<button className="loginbtn"  type="submit"> Sign up for CloudBoost </button>
                   </form>
          		</div>
 
-               <div className="loginbox twotop" >
+               <div className={this.state.successMessage == '' ? 'loginbox twotop':'hide'}>
                   <h5 className="tacenter bfont fs13">By creating an account, you agree with the <a href="https://cloudboost.io/terms" target="_blank" className="forgotpw">Terms and Conditions </a>.</h5>
                </div>
                
-               <div className="loginbox twotop" >
+               <div className={this.state.successMessage == '' ? 'loginbox twotop':'hide'}>
                   <h5 className="tacenter">Already have an account? <Link to="/login"><a href="" className="forgotpw">Log in. </a></Link></h5>
                </div>
             </div>
