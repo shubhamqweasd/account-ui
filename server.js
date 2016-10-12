@@ -19,7 +19,7 @@ app.get('/app/key.js',function(req,res){
 		content+= "DASHBOARD_URL = null,\n";
 		content+= "ACCOUNTS_URL = null,\n";
 		content+= "LANDING_URL = 'https://www.cloudboost.io';\n";
-		content+= "if(window.location.hostname==='account.cloudboost.io'){\n";
+		content+= "if(window.location.hostname==='accounts.cloudboost.io'){\n";
 		content+= "USER_SERVICE_URL='https://service.cloudboost.io';\n";
 		content+= "SERVER_URL='https://api.cloudboost.io';\n";
 		content+= "DASHBOARD_URL='https://dashboard.cloudboost.io';\n";
