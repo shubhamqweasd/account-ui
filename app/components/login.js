@@ -18,7 +18,7 @@ class Login extends React.Component {
             cookie.save('userFullname', data.data.name, { path: '/' });
             cookie.save('email', data.data.email, { path: '/' });
             cookie.save('createdAt', data.data.createdAt, { path: '/' });
-			window.location.href = configObject.dashboardUrl
+			window.location.href = DASHBOARD_URL;
 		}.bind(this),function(error){
 			this.setProgress(false)			
 			if(error.response.data.message == "Account verification needed"){
