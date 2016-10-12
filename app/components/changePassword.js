@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router'
-import configObject from '../config/app'
 import axios from 'axios'
 import CircularProgress from 'material-ui/CircularProgress'
 
@@ -9,7 +8,7 @@ class ChangePassword extends React.Component {
       super()
       this.state = {
          errorMessage:'',
-         successMessage: "",
+         success: false,
          password:"",
          confirmPassword:"",
          code:null,
@@ -26,11 +25,11 @@ class ChangePassword extends React.Component {
    change(){
       this.setProgress(true)
       let postData = {code:this.state.code,password:this.state.password}
-      axios.post(configObject.frontendServerURL+"/user/updatePassword",postData).then(function(data){
+      axios.post(USER_SERVICE_URL+"/user/updatePassword",postData).then(function(data){
          this.setProgress(false)
          this.state.password = ''
          this.state.confirmPassword = ''
-         this.state.successMessage = 'We have changed your password, you can now login with your new password. '
+         this.state.success = true;
          this.state['errorMessage'] = ''
          this.setState(this.state)
       }.bind(this),function(err){
@@ -71,24 +70,31 @@ class ChangePassword extends React.Component {
                <div id="image">
                   <img className="logo" src="./app/assets/images/CbLogoIcon.png"/>
                </div>
-               <div id="headLine" >
-                  <h3 className="tacenter hfont">Change password.</h3>
+               <div id="headLine" className={this.state.success ? 'hide':''}>
+                  <h3>Change your password.</h3>
                </div>
-               <div id="box" >
-                  <h5 className="tacenter bfont">Enter your new password below.</h5>
+                <div id="headLine" className={!this.state.success ? 'hide':''}>
+                  <h3>We've changed your password.</h3>
                </div>
-         		<div className="loginbox">
+               <div id="box" className={this.state.success ? 'hide':''}>
+                  <h5 className="tacenter bfont">Enter your new password and we'll change it for you.</h5>
+               </div>
+                <div id="box" className={!this.state.success ? 'hide':''}>
+                  <h5 className="tacenter bfont">We have chnaged your password. You can now login to your account.</h5>
+               </div>
+         		<div className={this.state.success ? 'hide':'loginbox'}>
                   <h5 className="tacenter red">{ this.state.errorMessage }</h5>
-                  <h5 className="tacenter green">{ this.state.successMessage }</h5>
-                  <h4 className={!this.state.successMessage == '' ? 'tacenter':'hide'}><Link to="/login"><a href="#" className="forgotpw">Go to login</a></Link> </h4>
-                  <form onSubmit={this.matchPasswords.bind(this)} className={this.state.successMessage == '' ? '':'hide'}>
+                  <form onSubmit={this.matchPasswords.bind(this)} >
             			<input type="password" value={this.state.password} onChange={this.changeHandler.bind(this,'password')} className="loginInput from-control" placeholder="Password." required/>
                      <input type="password" value={this.state.confirmPassword} onChange={this.changeHandler.bind(this,'confirmPassword')} className="loginInput from-control" placeholder="Confirm password." required/>
-            			<button className="loginbtn" type="submit"> SUBMIT </button>
-                     <Link to="/login" className={this.state.successMessage == '' ? '':'hide'}><a href="#" className="forgotpw fl">Login.</a></Link>
+            			<button className="loginbtn" type="submit"> Change Password </button>
                   </form>
          		</div>
+               <div className='loginbox twotop'>
+                  <h5 className="tacenter">Want to Login? <Link to="/login"><a href="" className="forgotpw">Log in. </a></Link></h5>
+               </div>
          	</div>
+            
          </div>
       );
    }

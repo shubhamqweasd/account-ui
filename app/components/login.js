@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router'
-import configObject from '../config/app'
 import axios from 'axios'
 import cookie from 'react-cookie'
 import CircularProgress from 'material-ui/CircularProgress';
@@ -14,7 +13,7 @@ class Login extends React.Component {
 		e.preventDefault()
 		this.setProgress(true)
 		let postData = {email:this.state.email,password:this.state.password}
-		axios.post(configObject.frontendServerURL+"/user/signin",postData).then(function(data){
+		axios.post(USER_SERVICE_URL+"/user/signin",postData).then(function(data){
 			cookie.save('userId', data.data._id, { path: '/' });
             cookie.save('userFullname', data.data.name, { path: '/' });
             cookie.save('email', data.data.email, { path: '/' });
@@ -37,11 +36,12 @@ class Login extends React.Component {
 	}
 	resend(){
 		let postData = {email:this.state.email}
-		// axios.post(configObject.frontendServerURL+"/user/resendverification",postData).then(function(data){
+		// axios.post(USER_SERVICE_URL+"/user/resendverification",postData).then(function(data){
 		// 	this.setInitialState()
 		// }.bind(this))
-		axios.post(configObject.frontendServerURL+"/user/resendverification",postData)
-		this.setInitialState()
+		axios.post(USER_SERVICE_URL+"/user/resendverification",postData)
+		this.state['verificationEmailSent'] = true;
+		this.setState(this.state)
 	}
 	changeHandler(which,e){
 		this.state[which] = e.target.value
@@ -62,6 +62,7 @@ class Login extends React.Component {
 		this.setState(this.state)
 	}
 	render() {
+
 		return (
 			<div>
 	            <div className={this.state.progress ? 'loader':'hide'}>
@@ -72,13 +73,17 @@ class Login extends React.Component {
 						<img className="logo" src="./app/assets/images/CbLogoIcon.png"/>
 					</div>
 					<div id="headLine">
-						<h3 className="tacenter hfont">Welcome back!</h3>
+						<h3 className={this.state.notVerified || this.state.verificationEmailSent ? 'hide':''}>Welcome back!</h3>
+						<h3 className={!this.state.notVerified || this.state.verificationEmailSent ? 'hide':''}>Your email is not verified.</h3>
+						<h3 className={!this.state.verificationEmailSent ? 'hide':''}>Verification email sent.</h3>
 					</div>
 					<div id="box">
-						<h5 className="tacenter bfont">Sign in with your CloudBoost ID to continue.</h5>
+						<h5 className={this.state.notVerified || this.state.verificationEmailSent ? 'hide':''}>Sign in with your CloudBoost ID to continue.</h5>
+						<h5 className={!this.state.notVerified || this.state.verificationEmailSent ? 'hide':''}>Please click on resend email button and we'll send you a verification email.</h5>
+						<h5 className={!this.state.verificationEmailSent ? 'hide':''}>We have sent you the verification email. Please make sure you check spam.</h5>
 					</div>
-					<div className="loginbox">
-						<h5 className="tacenter red">{ this.state.errorMessage }</h5>
+					<div id="loginbox" className={this.state.verificationEmailSent ? 'hide':''}>
+						<h5 className={this.state.notVerified ? 'hide':'tacenter red'}>{ this.state.errorMessage }</h5>
 						<button onClick={this.resend.bind(this)} className={this.state.notVerified ? 'loginbtn':'hide'}>Resend Verification Email</button>
 						<form onSubmit={this.login.bind(this)} className={!this.state.notVerified ? '':'hide'}>
 							<input type="email" value={this.state.email} onChange={this.changeHandler.bind(this,'email')} className="loginInput from-control" placeholder="Your Email." required />

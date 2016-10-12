@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router'
-import configObject from '../config/app'
 import axios from 'axios'
 import cookie from 'react-cookie'
 import CircularProgress from 'material-ui/CircularProgress'
@@ -18,7 +17,7 @@ class NewServer extends React.Component {
       }
    }
    componentWillMount() {
-      axios.get(configObject.frontendServerURL+'/server/isNewServer').then((res)=>{
+      axios.get(USER_SERVICE_URL+'/server/isNewServer').then((res)=>{
          if(!res.data){
             window.location.href = '/#/login'
          }
@@ -28,7 +27,7 @@ class NewServer extends React.Component {
       e.preventDefault()
       this.setProgress(true)
       let postData = {email:this.state.email,password:this.state.password,name:this.state.name,isAdmin:true}
-      axios.post(configObject.frontendServerURL+"/user/signup",postData).then(function(data){
+      axios.post(USER_SERVICE_URL+"/user/signup",postData).then(function(data){
          cookie.save('userId', data.data._id, { path: '/' });
          cookie.save('userFullname', data.data.name, { path: '/' });
          cookie.save('email', data.data.email, { path: '/' });

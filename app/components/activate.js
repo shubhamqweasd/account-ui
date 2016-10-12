@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router'
-import configObject from '../config/app'
 import axios from 'axios'
 import cookie from 'react-cookie'
 import CircularProgress from 'material-ui/CircularProgress'
@@ -27,12 +26,12 @@ class Activate extends React.Component {
    activate(){
       this.setProgress(true)
       let postData = {code:this.state.code}
-      axios.post(configObject.frontendServerURL+"/user/activate",postData).then(function(data){
+      axios.post(USER_SERVICE_URL+"/user/activate",postData).then(function(data){
          cookie.save('userId', data.data._id, { path: '/' });
          cookie.save('userFullname', data.data.name, { path: '/' });
          cookie.save('email', data.data.email, { path: '/' });
          cookie.save('createdAt', data.data.createdAt, { path: '/' });
-         window.location.href = configObject.dashboardUrl
+         window.location.href = DASHBOARD_URL;
       }.bind(this),function(error){
          this.setProgress(false)
          this.state['errorMessage'] = 'Invalid Activation code.'
