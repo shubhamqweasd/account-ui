@@ -57,8 +57,9 @@ if(__isHosted){
 		     	<Route path="login" component={Login}/>
 		     	<Route path="reset" component={Reset}/>
 		     	<Route path="changepassword" component={ChangePassword}/>
-		     	<Route path="/newserver" component={NewServer}/>
 		    </Route>
+		    <Route path="/newserver" component={NewServer}>
+	    	</Route>
 		</Router>
 	), document.getElementById('main'));
 }
