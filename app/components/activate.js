@@ -27,10 +27,10 @@ class Activate extends React.Component {
       this.setProgress(true)
       let postData = {code:this.state.code}
       axios.post(USER_SERVICE_URL+"/user/activate",postData).then(function(data){
-         cookie.save('userId', data.data._id, { path: '/' });
-         cookie.save('userFullname', data.data.name, { path: '/' });
-         cookie.save('email', data.data.email, { path: '/' });
-         cookie.save('createdAt', data.data.createdAt, { path: '/' });
+         cookie.save('userId', data.data._id, { path: '/' ,domain:SERVER_DOMAIN});
+         cookie.save('userFullname', data.data.name, { path: '/' ,domain:SERVER_DOMAIN});
+         cookie.save('email', data.data.email, { path: '/' ,domain:SERVER_DOMAIN});
+         cookie.save('createdAt', data.data.createdAt, { path: '/' ,domain:SERVER_DOMAIN});
          window.location.href = DASHBOARD_URL;
       }.bind(this),function(error){
          this.setProgress(false)
