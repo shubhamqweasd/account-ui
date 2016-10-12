@@ -48,6 +48,7 @@ class Login extends React.Component {
 		this.setState(this.state)
 	}
 	setInitialState(){
+
 		this.state = {
 				errorMessage:'',
 				email:'',
@@ -55,6 +56,10 @@ class Login extends React.Component {
 				notVerified:false,
 				progress:false
 			}
+
+		if(__isHosted){
+			this.state.isHosted = true;
+		}
 		this.setState(this.state)
 	}
 	setProgress(which){
@@ -92,7 +97,7 @@ class Login extends React.Component {
 						</form>
 						<Link to="/reset" className={!this.state.notVerified ? '':'hide'}><a href="#" className="forgotpw fl">Forgot password.</a></Link>
 						<Link to="/login" className={this.state.notVerified ? '':'hide'} onClick={this.setInitialState.bind(this)}><a href="#" className="forgotpw fl">Login.</a></Link>
-						<Link to="/signup"><a href="#" className="forgotpw fr"><span class="blackColor">Dont have an account?</span> Get Started.</a></Link>
+						<Link to="/signup" className={this.state.isHosted ? '':'hide'}><a href="#" className="forgotpw fr"><span class="blackColor">Dont have an account?</span> Get Started.</a></Link>
 					</div>
 				</div>
 			</div>

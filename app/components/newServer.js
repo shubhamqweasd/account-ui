@@ -21,7 +21,7 @@ class NewServer extends React.Component {
          if(!res.data){
             window.location.href = '/#/login'
          }
-      })
+      });
    }
    signUp(e){
       e.preventDefault()
@@ -32,7 +32,7 @@ class NewServer extends React.Component {
          cookie.save('userFullname', data.data.name, { path: '/' });
          cookie.save('email', data.data.email, { path: '/' });
          cookie.save('createdAt', data.data.createdAt, { path: '/' });
-         window.location.href = configObject.dashboardUrl
+         window.location.href = DASHBOARD_URL;
       }.bind(this),function(err){
          this.setProgress(false) 
          this.state['errorMessage'] = 'User with same credentials exists, Please try again.'
@@ -65,7 +65,7 @@ class NewServer extends React.Component {
             			<h3 className="tacenter hfont">Setup your CloudBoost Server.</h3>
             		</div>
             		<div id="box">
-            			<h5 className="tacenter bfont">Create an Admin account to get started.</h5>
+            			<h5 className="tacenter bfont">Create an admin account to get started.</h5>
             		</div>
             		<div className="loginbox">
                      <h5 className="tacenter red">{ this.state.errorMessage }</h5>
@@ -73,10 +73,10 @@ class NewServer extends React.Component {
                			<input type="text" value={this.state.name} onChange={this.changeHandler.bind(this,'name')} className="loginInput from-control" placeholder="Full Name" required/>
                         <input type="email" value={this.state.email} onChange={this.changeHandler.bind(this,'email')} className="loginInput from-control" placeholder="Email" required/>
                         <input type="password" value={this.state.password} onChange={this.changeHandler.bind(this,'password')} className="loginInput from-control" placeholder="Password" required/>
-               			<button className="loginbtn" type="submit"> Setup server</button>
+               			<button className="loginbtn" type="submit"> Setup Server</button>
                      </form>
             		</div>
-                  <div className="loginbox twotop" >
+                  <div className="loginbox twotop">
                      <h5 className="tacenter bfont fs13">By creating an account, you agree with the <a href="https://cloudboost.io/terms" target="_blank" className="forgotpw">Terms and Conditions </a>.</h5>
                   </div>
             	</div>

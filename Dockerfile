@@ -21,8 +21,8 @@ RUN npm install
 COPY . /usr/src/app
 
 # Expose ports.
-#   - 70: CloudBoost Accounts
-EXPOSE 70
+#   - 1447: CloudBoost Accounts
+EXPOSE 1447
 
 #Run the app
 CMD [ "npm", "start" ]
