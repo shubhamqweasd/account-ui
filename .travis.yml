@@ -40,4 +40,7 @@ after_success:
 - docker push cloudboost/accounts:latest
 #Upload to Kubernetes for deployment.
 - kubectl rolling-update cloudboost-accounts --image=cloudboost/accounts:latest --image-pull-policy=Always
+#Notify Team on Slack
+notifications:
+  slack: cloudboost:gm7nWJDLDtBRyF75VKLKOoMW
 
