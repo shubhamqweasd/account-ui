@@ -21,6 +21,11 @@ class Activate extends React.Component {
       }
    }
    componentDidMount() {
+      if(!__isDevelopment){
+        /****Tracking*********/          
+         mixpanel.track('Portal:Visited Activation Page', { "Visited": "Visited Activation page in portal!"});
+        /****End of Tracking*****/
+      }
       this.activate()
    }
    activate(){

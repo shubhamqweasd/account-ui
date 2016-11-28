@@ -13,6 +13,13 @@ class Reset extends React.Component {
          progress:false
       }
    }
+   componentDidMount(){
+      if(!__isDevelopment){
+         /****Tracking*********/          
+         mixpanel.track('Portal:Visited ForgotPassword Page', { "Visited": "Visited ForgotPassword page in portal!"});
+         /****End of Tracking*****/
+      } 
+   }
    reset(e){
       e.preventDefault()
       this.setProgress(true)
@@ -32,6 +39,11 @@ class Reset extends React.Component {
          this.state.email = ''
          this.setState(this.state)
       }.bind(this))
+      if(!__isDevelopment){
+            /****Tracking*********/          
+             mixpanel.track('Portal:Clicked ResetPassword Button', { "Clicked": "ResetPassword Button in portal!"});
+            /****End of Tracking*****/
+         }
    }
    changeHandler(which,e){
       this.state[which] = e.target.value

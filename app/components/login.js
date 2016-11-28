@@ -9,11 +9,25 @@ class Login extends React.Component {
 		super()
 		this.setInitialState()
 	}
+	componentDidMount(){
+		if(!__isDevelopment){
+			/****Tracking*********/          
+			mixpanel.track('Portal:Visited LogIn Page', { "Visited": "Visited Log In page in portal!"});
+			/****End of Tracking*****/
+		} 
+   }
 	login(e){
 		e.preventDefault()
 		this.setProgress(true)
 		let postData = {email:this.state.email,password:this.state.password}
 		axios.post(USER_SERVICE_URL+"/user/signin",postData).then(function(data){
+			if(!__isDevelopment){
+               /****Tracking*********/
+               mixpanel.identify(data.data._id);
+               mixpanel.register({ "Name": data.data.name,"Email": data.data.email});
+               mixpanel.track('LogIn', { "Name": data.data.name,"Email": data.data.email});
+              /****End of Tracking*****/
+            }
 			cookie.save('userId', data.data._id, { path: '/' ,domain:SERVER_DOMAIN});
             cookie.save('userFullname', data.data.name, { path: '/' ,domain:SERVER_DOMAIN});
             cookie.save('email', data.data.email, { path: '/' ,domain:SERVER_DOMAIN});
@@ -33,6 +47,11 @@ class Login extends React.Component {
          	}
 			this.setState(this.state)
 		}.bind(this))
+		if(!__isDevelopment){
+			/****Tracking*********/          
+			mixpanel.track('Portal:Clicked LogIn Button', { "Clicked": "LogIn Button in portal!"});
+			/****End of Tracking*****/
+		}
 	}
 	resend(){
 		let postData = {email:this.state.email}

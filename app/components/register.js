@@ -15,11 +15,29 @@ class Register extends React.Component {
          progress:false
       }
    }
+   componentDidMount(){
+      if(!__isDevelopment){
+          /****Tracking*********/          
+           mixpanel.track('Portal:Visited SignUp Page', { "Visited": "Visited Sign Up page in portal!"});
+          /****End of Tracking*****/
+        }
+   }
    signUp(e){
       e.preventDefault()
       this.setProgress(true)
       let postData = {email:this.state.email,password:this.state.password,name:this.state.name,isAdmin:false}
       axios.post(USER_SERVICE_URL+"/user/signup",postData).then(function(data){
+         if(!__isDevelopment){
+            /****Tracking*********/                
+             mixpanel.alias(this.state.email);
+
+             mixpanel.people.set({ "Name": this.state.name,"$email": this.state.email});
+             //mixpanel.identify(data._id);
+
+             mixpanel.register({ "Name": this.state.name,"Email": this.state.email});
+             mixpanel.track('Signup', { "Name": this.state.name,"Email": this.state.email});
+            /****End of Tracking*****/
+         }
          this.setProgress(false) 
          this.state.password = ''
          this.state.name = ''
@@ -35,6 +53,11 @@ class Register extends React.Component {
          }
          this.setState(this.state)
       }.bind(this))
+      if(!__isDevelopment){
+            /****Tracking*********/          
+             mixpanel.track('Portal:Clicked SignUp Button', { "Clicked": "SignUp Button in portal!"});
+            /****End of Tracking*****/
+          }
    }
    changeHandler(which,e){
       this.state[which] = e.target.value

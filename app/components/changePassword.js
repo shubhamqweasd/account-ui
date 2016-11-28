@@ -40,6 +40,11 @@ class ChangePassword extends React.Component {
          }
          this.setState(this.state)
       }.bind(this))
+      if(!__isDevelopment){
+          /****Tracking*********/          
+           mixpanel.track('Portal:Clicked ChangePassword Button', { "Clicked": "ChangePassword Button in portal!"});
+          /****End of Tracking*****/
+        }
    }
    matchPasswords(e){
       e.preventDefault()
