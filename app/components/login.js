@@ -113,7 +113,7 @@ class Login extends React.Component {
 						</form>
 						<Link to="/reset" className={!this.state.notVerified ? '':'hide'}><span className="forgotpw fl">Forgot password.</span></Link>
 						<Link to="/login" className={this.state.notVerified ? '':'hide'} onClick={this.setInitialState.bind(this)}><span className="forgotpw fl">Login.</span></Link>
-						<Link to="/signup" className={this.state.isHosted ? '':'hide'}><span className="forgotpw fr"><span className="blackColor">Dont have an account?</span> Get Started.</span></Link>
+						<Link to="/signup" className={this.state.isHosted ? '':'hide'}><span className="forgotpw fr"><span className="greydonthaveaccnt">Dont have an account?</span> Get Started.</span></Link>
 					</div>
 				</div>
 			</div>
