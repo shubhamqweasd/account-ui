@@ -103,7 +103,7 @@ class Register extends React.Component {
                </div>
 
                <div className={!this.state.success ? 'loginbox twotop':'hide'}>
-                  <h5 className="tacenter">Already have an account? <Link to="/login"><a href="" className="forgotpw">Log in. </a></Link></h5>
+                  <h5 className="tacenter">Already have an account? <Link to="/login"><span className="forgotpw">Log in. </span></Link></h5>
                </div>
 
             </div>

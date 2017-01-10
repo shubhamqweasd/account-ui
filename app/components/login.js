@@ -55,9 +55,6 @@ class Login extends React.Component {
 	}
 	resend(){
 		let postData = {email:this.state.email}
-		// axios.post(USER_SERVICE_URL+"/user/resendverification",postData).then(function(data){
-		// 	this.setInitialState()
-		// }.bind(this))
 		axios.post(USER_SERVICE_URL+"/user/resendverification",postData)
 		this.state['verificationEmailSent'] = true;
 		this.setState(this.state)
@@ -112,11 +109,11 @@ class Login extends React.Component {
 						<form onSubmit={this.login.bind(this)} className={!this.state.notVerified ? '':'hide'}>
 							<input type="email" value={this.state.email} onChange={this.changeHandler.bind(this,'email')} className="loginInput from-control" placeholder="Your Email." required />
 							<input type="password" value={this.state.password} onChange={this.changeHandler.bind(this,'password')} className="loginInput from-control" placeholder="Your Password." required />
-							<button className="loginbtn" type="submit"> Sign in to CloudBoost <i class="icon ion-chevron-right"></i> </button>
+							<button className="loginbtn" type="submit"> Sign in to CloudBoost <i className="icon ion-chevron-right"></i> </button>
 						</form>
-						<Link to="/reset" className={!this.state.notVerified ? '':'hide'}><a href="#" className="forgotpw fl">Forgot password.</a></Link>
-						<Link to="/login" className={this.state.notVerified ? '':'hide'} onClick={this.setInitialState.bind(this)}><a href="#" className="forgotpw fl">Login.</a></Link>
-						<Link to="/signup" className={this.state.isHosted ? '':'hide'}><a href="#" className="forgotpw fr"><span class="blackColor">Dont have an account?</span> Get Started.</a></Link>
+						<Link to="/reset" className={!this.state.notVerified ? '':'hide'}><span className="forgotpw fl">Forgot password.</span></Link>
+						<Link to="/login" className={this.state.notVerified ? '':'hide'} onClick={this.setInitialState.bind(this)}><span className="forgotpw fl">Login.</span></Link>
+						<Link to="/signup" className={this.state.isHosted ? '':'hide'}><span className="forgotpw fr"><span className="blackColor">Dont have an account?</span> Get Started.</span></Link>
 					</div>
 				</div>
 			</div>

@@ -68,7 +68,7 @@ class Activate extends React.Component {
                </div>
          		<div className="loginbox">
                   <h5 className="tacenter red">{ this.state.errorMessage }</h5>
-                  <h4 className="tacenter"><Link to="/login"><a href="#" className="forgotpw">Go to login</a></Link> </h4>
+                  <h4 className="tacenter"><Link to="/login"><span className="forgotpw">Go to login</span></Link> </h4>
          		</div>
          	</div>
          </div>

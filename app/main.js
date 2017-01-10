@@ -2,7 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, hashHistory, IndexRoute } from 'react-router'
 import axios from 'axios'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group' 
 import injectTapEventPlugin from 'react-tap-event-plugin';
 //injectTapEventPlugin();
 
@@ -26,11 +27,21 @@ class Layout extends React.Component {
 	}
 	render() {
 	  return (
-	  	<div>
-	  		<MuiThemeProvider>
-	  			{ this.props.children }
-	  		</MuiThemeProvider>
-	  	</div>
+	  
+		<MuiThemeProvider>
+			<ReactCSSTransitionGroup
+				component="div"
+				transitionName="pagetransition"
+				transitionEnterTimeout={500}
+				transitionLeaveTimeout={500}
+			>
+				{
+					React.cloneElement(this.props.children, {
+					key: this.props.location.pathname
+				})}
+			</ReactCSSTransitionGroup>
+		</MuiThemeProvider>
+		
 	  );
 	}
 }
