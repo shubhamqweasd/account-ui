@@ -32,8 +32,8 @@ class Layout extends React.Component {
 			<ReactCSSTransitionGroup
 				component="div"
 				transitionName="pagetransition"
-				transitionEnterTimeout={500}
-				transitionLeaveTimeout={500}
+				transitionEnterTimeout={300}
+				transitionLeaveTimeout={300}
 			>
 				{
 					React.cloneElement(this.props.children, {
