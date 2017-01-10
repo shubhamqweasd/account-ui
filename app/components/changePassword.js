@@ -96,7 +96,7 @@ class ChangePassword extends React.Component {
                   </form>
          		</div>
                <div className='loginbox twotop'>
-                  <h5 className="tacenter">Want to Login? <Link to="/login"><a href="" className="forgotpw">Log in. </a></Link></h5>
+                  <h5 className="tacenter">Want to Login? <Link to="/login"><span className="forgotpw">Log in. </span></Link></h5>
                </div>
          	</div>
             

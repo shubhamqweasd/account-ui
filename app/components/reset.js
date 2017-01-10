@@ -81,11 +81,11 @@ class Reset extends React.Component {
             			<input type="email" value={this.state.email} onChange={this.changeHandler.bind(this,'email')} className="loginInput from-control" placeholder="Email." disabled={this.state.successReset} required/>
             			<button className="loginbtn" type="submit"> Reset Password </button>
                   </form>
-                  <Link to="/login" ><a href="#" className="forgotpw fl">Login.</a></Link>
-                  <Link to="/signup"><a href="#" className="forgotpw fr"><span class="blackColor">Dont have an account?</span> Create one.</a></Link>
+                  <Link to="/login" ><span className="forgotpw fl">Login.</span></Link>
+                  <Link to="/signup"><span className="forgotpw fr"><span className="blackColor">Dont have an account?</span> Create one.</span></Link>
          		</div>
                <div className={this.state.success ? 'loginbox':'hide'}>
-                  <h5 className="tacenter">Want to login? <Link to="/login"><a href="" className="forgotpw">Log in. </a></Link></h5>
+                  <h5 className="tacenter">Want to login? <Link to="/login"><span className="forgotpw">Log in. </span></Link></h5>
                </div>
          	</div>
          </div>

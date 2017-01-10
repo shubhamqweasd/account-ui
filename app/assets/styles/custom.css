@@ -159,3 +159,29 @@ h5, .bfont{
 .fs13{
     font-size: 13px !important;
 }
+
+
+
+
+.pagetransition-enter {
+  opacity: 0.01;
+  transition: opacity .5s ease-in;
+}
+
+.pagetransition-enter.pagetransition-enter-active {
+  opacity: 1;
+}
+
+.pagetransition-leave {
+  opacity: 1;
+  transition: opacity .5s ease-in;
+}
+
+.pagetransition-leave.pagetransition-leave-active {
+  opacity: 0;
+}
+
+.link-active {
+  color: #bbbbbb;
+  text-decoration: none;
+}
