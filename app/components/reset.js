@@ -82,7 +82,7 @@ class Reset extends React.Component {
             			<button className="loginbtn" type="submit"> Reset Password </button>
                   </form>
                   <Link to="/login" ><span className="forgotpw fl">Login.</span></Link>
-                  <Link to="/signup"><span className="forgotpw fr"><span className="blackColor">Dont have an account?</span> Create one.</span></Link>
+                  <Link to="/signup"><span className="forgotpw fr"><span className="greydonthaveaccnt">Dont have an account?</span> Create one.</span></Link>
          		</div>
                <div className={this.state.success ? 'loginbox':'hide'}>
                   <h5 className="tacenter">Want to login? <Link to="/login"><span className="forgotpw">Log in. </span></Link></h5>

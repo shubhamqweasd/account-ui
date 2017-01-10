@@ -160,7 +160,9 @@ h5, .bfont{
     font-size: 13px !important;
 }
 
-
+.greydonthaveaccnt{
+    color: #989DAB !important;
+}
 
 
 .pagetransition-enter {
