@@ -28,10 +28,10 @@ class Login extends React.Component {
                mixpanel.track('LogIn', { "Name": data.data.name,"Email": data.data.email});
               /****End of Tracking*****/
             }
-			cookie.save('userId', data.data._id, { path: '/' });
-            cookie.save('userFullname', data.data.name, { path: '/' });
-            cookie.save('email', data.data.email, { path: '/' });
-            cookie.save('createdAt', data.data.createdAt, { path: '/' });
+			cookie.save('userId', data.data._id, { path: '/' ,domain:SERVER_DOMAIN});
+            cookie.save('userFullname', data.data.name, { path: '/' ,domain:SERVER_DOMAIN});
+            cookie.save('email', data.data.email, { path: '/' ,domain:SERVER_DOMAIN});
+            cookie.save('createdAt', data.data.createdAt, { path: '/' ,domain:SERVER_DOMAIN});
 			window.location.href = DASHBOARD_URL;
 		}.bind(this),function(error){
 			this.setProgress(false)			
