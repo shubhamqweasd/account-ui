@@ -12,7 +12,7 @@ class Layout extends React.Component {
       axios.get(USER_SERVICE_URL+'/server/isNewServer').then((res)=>{
          if(res.data){
             // changes this to server root/#/newserver
-            window.location.href = '/#/newserver'
+            window.location.href = '/newserver'
          }
       },(err)=>{
          
