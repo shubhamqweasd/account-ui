@@ -7,7 +7,14 @@ import CircularProgress from 'material-ui/CircularProgress';
 class Login extends React.Component {
 	constructor(){
 		super()
-		this.setInitialState()
+		this.state = {
+				errorMessage:'',
+				email:'',
+				password:'',
+				notVerified:false,
+				progress:false,
+				isHosted:__isHosted ? __isHosted : false
+			}
 	}
 	componentDidMount(){
 		if(!__isDevelopment){
@@ -91,7 +98,7 @@ class Login extends React.Component {
 	            </div>
 				<div id="login" className={!this.state.progress ? '':'hide'}>
 					<div id="image">
-						<img className="logo" src="./app/assets/images/CbLogoIcon.png"/>
+						<img className="logo" src="/assets/images/CbLogoIcon.png"/>
 					</div>
 					<div id="headLine">
 						<h3 className={this.state.notVerified || this.state.verificationEmailSent ? 'hide':''}>Welcome back!</h3>
