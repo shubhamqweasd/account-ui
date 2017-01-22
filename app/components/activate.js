@@ -58,7 +58,7 @@ class Activate extends React.Component {
             </div>
           	<div id="login" className={!this.state.progress ? '':'hide'}>
                <div id="image">
-                  <img className="logo" src="./app/assets/images/CbLogoIcon.png"/>
+                  <img className="logo" src="/assets/images/CbLogoIcon.png"/>
                </div>
                <div id="headLine" >
                   <h3 className="tacenter hfont">Account Activation.</h3>

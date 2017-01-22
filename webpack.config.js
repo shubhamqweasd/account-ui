@@ -3,8 +3,8 @@ var config = {
    entry: './app/main.js',
 	
    output: {
-      path:'./',
-      filename: 'index.min.js',
+      path:'./app',
+      filename: 'client.min.js',
    },
    module: {
       loaders: [

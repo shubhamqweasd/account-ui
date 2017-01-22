@@ -61,7 +61,7 @@ class Reset extends React.Component {
             </div>
           	<div id="login" className={!this.state.progress ? '':'hide'}>
                <div id="image">
-                  <img className="logo" src="./app/assets/images/CbLogoIcon.png"/>
+                  <img className="logo" src="/assets/images/CbLogoIcon.png"/>
                </div>
                <div id="headLine" className={!this.state.success ? '':'hide'}>
                   <h3 className="tacenter hfont">Reset your password.</h3>
